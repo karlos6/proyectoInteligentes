@@ -12,7 +12,11 @@ import jade.core.ProfileImpl;
 import jade.wrapper.AgentController;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import proyectointeligentes.Agentes.Agente1;
+
+
+
 
 
 /**
@@ -25,13 +29,26 @@ public class ProyectoInteligentes {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ControllerException {
-        
+      
+        /*
       String[] opciones = { "-gui", "-agents", "Agente1:proyectoInteligentes.Agente1" };
       Boot.main(opciones);
 
       Agente1 agente = new Agente1();
       agente.setup("resivi los datos que me dijeron mi so");
       agente.takeDown();
+      */
+        
+      
+       
+       
+       
+
+       
+       
+      
+   
+        
       
      
       
