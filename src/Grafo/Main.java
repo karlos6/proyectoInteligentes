@@ -43,13 +43,14 @@ public class Main {
         }
     }
 
-    System.out.println("Grafo : " + grafo.toString());
-   
-    // Obtener la lista de adyacencia del vértice "Q"
-    List<String> adyacentesDeQ = grafo.getAdjacentVertices("Z");
+        System.out.println("Grafo : " + grafo.toString());
 
-    // Imprimir la lista de adyacencia de "Q"
-    System.out.println("Adyacentes de Q: " + adyacentesDeQ);
-    
+        // Obtener la lista de adyacencia del vértice "Q"
+        List<String> adyacentesDeQ = grafo.getAdjacentVertices("Z");
+
+        // Imprimir la lista de adyacencia de "Q"
+        System.out.println("Adyacentes de Q: " + adyacentesDeQ);
+
+         Recorridos.dfs(grafo, "A");
     }
 }
