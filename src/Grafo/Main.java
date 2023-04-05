@@ -51,6 +51,6 @@ public class Main {
         // Imprimir la lista de adyacencia de "Q"
         System.out.println("Adyacentes de Q: " + adyacentesDeQ);
 
-         Recorridos.dfs(grafo, "A");
+        Recorridos.dfs(grafo, "A");
     }
 }

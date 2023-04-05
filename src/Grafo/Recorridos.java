@@ -6,7 +6,9 @@
 package Grafo;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -28,5 +30,28 @@ public class Recorridos {
                 dfsHelper(graph, neighbor, visited);
             }
         }
+    }
+    
+    public static void bfs(Graph<String> graph, String startVertex) {
+        Set<String> visited = new HashSet<>();
+        Queue<String> queue = new LinkedList<>();
+        queue.add(startVertex);
+        bfsHelper(graph, visited, queue);
+    }
+
+    private static void bfsHelper(Graph<String> graph, Set<String> visited, Queue<String> queue) {
+        if (queue.isEmpty()) {
+            return;
+        }
+        String current = queue.poll();
+        visited.add(current);
+        System.out.print(current + " ");
+        List<String> neighbors = graph.getAdjacentVertices(current);
+        for (String neighbor : neighbors) {
+            if (!visited.contains(neighbor)) {
+                queue.add(neighbor);
+            }
+        }
+        bfsHelper(graph, visited, queue);
     }
 }
