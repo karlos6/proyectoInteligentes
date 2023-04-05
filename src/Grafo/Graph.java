@@ -5,34 +5,59 @@
  */
 package Grafo;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 /**
  *
  * @author Asus
  */
-public class Graph {
-    private List<Vertex> vertices;
-    private List<Edge> aristas;
-    
+public class Graph<T> {
+    private Map<T, Set<T>> adjacencyList;
+
     public Graph() {
-        vertices = new ArrayList<>();
-        aristas = new ArrayList<>();
+        adjacencyList = new HashMap<>();
     }
-    
-    public void agregarVertice(Vertex vertice) {
-        vertices.add(vertice);
+
+    public void addVertex(T vertex) {
+        adjacencyList.putIfAbsent(vertex, new HashSet<>());
     }
-    
-    public void agregarArista(Edge arista) {
-        aristas.add(arista);
+
+    public void addEdge(T v1, T v2) {
+        adjacencyList.get(v1).add(v2);
+        adjacencyList.get(v2).add(v1);
     }
-    
-    public List<Vertex> obtenerVertices() {
-        return vertices;
+
+    public List<T> getAdjacentVertices(T vertex) {
+        return new ArrayList<>(adjacencyList.get(vertex));
     }
-    
-    public List<Edge> obtenerAristas() {
-        return aristas;
-    }   
-    
+
+    public int getNumVertices() {
+        return adjacencyList.size();
+    }
+
+    public int getNumEdges() {
+        int count = 0;
+        for (T v : adjacencyList.keySet()) {
+            count += adjacencyList.get(v).size();
+        }
+        return count / 2;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (T v : adjacencyList.keySet()) {
+            sb.append(v.toString() + ": ");
+            for (T neighbor : adjacencyList.get(v)) {
+                sb.append(neighbor.toString() + " ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
+
