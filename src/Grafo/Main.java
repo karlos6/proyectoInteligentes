@@ -55,6 +55,7 @@ public class Main {
         // Imprimir la lista de adyacencia de "Q"
         //System.out.println("Adyacentes de Q: " + adyacentesDeQ);
 
+
         //Recorridos.dfs(grafo, "A");
          
         //System.out.println("Adyacentes de Q: " + grafo.adjacencyList);
@@ -64,22 +65,16 @@ public class Main {
          //consto uniforme
         //Map<String, Integer> costoMinimo = Recorridos.costoUniforme(grafo.adjacencyList, "A","U");
         
-        List<String> costoMinimo = Recorridos.costoUniformemap(grafo.adjacencyList, "A","H");
+        List<String> costoMinimo = Recorridos.costoUniforme(grafo.adjacencyList, "A","H");
         System.out.println(costoMinimo);
 
-        //System.out.println("Costos mínimos desde A:");
-        //for (Map.Entry<String, Integer> entry : costoMinimo.entrySet()) {
-        //    System.out.println(entry.getKey() + ": " + entry.getValue());
-        //}
         
         
-        //Map<String, Integer> costoMinimos = Recorridos.costoUniformemap(grafo.adjacencyList, "A","U");
-        //for (Map.Entry<String, Integer> entry : costoMinimos.entrySet()) {
-        //    System.out.println(entry.getKey() + ": " + entry.getValue());
-        //}
         
         
-        //List<String> r = Recorridos.costoUniformel(grafo.adjacencyList, "A","C");
+        
+        
+       
         
       
     
@@ -91,6 +86,8 @@ public class Main {
     
     
     
+        Recorridos.dfs(grafo, "A");
+
     }
     
     
