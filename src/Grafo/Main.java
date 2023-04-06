@@ -18,44 +18,62 @@ import java.util.Set;
  */
 public class Main {
     public static void main(String[] args) {
-    String[][] matriz = {
+     String[][] matriz = {
         {"A", "B", "C", "D", "E", "F", "G"},
         {"H", "I", "J", "K", "L", "M", "N"},
         {"Ñ", "O", "P", "Q", "R", "S", "T"},
         {"U", "V", "W", "X", "Y", "Z", "Z1"}
     };
-
-    Graph<String> grafo = new Graph<String>();
-    Random rand = new Random();
     
-   // Agregar los vértices al grafo
-    for (int i = 0; i < matriz.length; i++) {
-        for (int j = 0; j < matriz[i].length; j++) {
-            grafo.addVertex(matriz[i][j], i,j);
-        }
-    }
+    String[][] matriz1 = {
+	            {"C", "C", "C", "C", "C", "R", "C"},
+	            {"C", "M", "C", "M", "C", "M", "C"},
+	            {"R", "C", "C", "C", "C", "C", "C"},
+	            {"C", "M", "C", "M", "C", "M", "C"}
+	        };
 
-    // Agregar las aristas al grafo
-    for (int i = 0; i < matriz.length; i++) {
-        for (int j = 0; j < matriz[i].length; j++) {
-            // Agregar arista con el siguiente vértice en la fila
-            if (j < matriz[i].length - 1) {
-                grafo.addEdge(matriz[i][j], matriz[i][j+1], rand.nextInt(99) + 1);
+            Graph<String> grafo = new Graph<String>();
+            Random rand = new Random();
+            
+           // Agregar los vértices al grafo
+            for (int i = 0; i < matriz.length; i++) {
+                for (int j = 0; j < matriz[i].length; j++) {
+                    grafo.addVertex(matriz[i][j], i,j);
+                }
             }
-            // Agregar arista con el siguiente vértice en la columna
-            if (i < matriz.length - 1) {
-                grafo.addEdge(matriz[i][j], matriz[i][j+1], rand.nextInt(99) + 1);
+
+            // Agregar las aristas al grafo
+            for (int i = 0; i < matriz.length; i++) {
+                for (int j = 0; j < matriz[i].length; j++) {
+                    // Agregar arista con el siguiente vértice en la fila
+                    if (j < matriz[i].length - 1) {
+                        grafo.addEdge(matriz[i][j], matriz[i][j+1], rand.nextInt(99) + 1);
+                    }
+                    // Agregar arista con el siguiente vértice en la columna
+                    if (i < matriz.length - 1) {
+                        grafo.addEdge(matriz[i][j], matriz[i+1][j], rand.nextInt(99) + 1);
+                    }
+                }
             }
-        }
-    }
+
+            System.out.println("Grafo : " + grafo.toString());
+
+            
+           // dfs(grafo, "A");
+            //System.out.println(" ");
+            //bfs(grafo, "A");
 
         ///System.out.println("Grafo : \n" + grafo.toString());
 
         // Obtener la lista de adyacencia del vértice "Q"
+
         //List<String> adyacentesDeQ = grafo.getAdjacentVertices("Z");
 
+        List<String> adyacentesDeQ = grafo.getAdjacentVertices("Q");
+
+
         // Imprimir la lista de adyacencia de "Q"
-        //System.out.println("Adyacentes de Q: " + adyacentesDeQ);
+        System.out.println("Adyacentes de Q: " + adyacentesDeQ);
 
 
         //Recorridos.dfs(grafo, "A");
