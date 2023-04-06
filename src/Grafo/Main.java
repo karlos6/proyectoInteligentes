@@ -52,7 +52,7 @@ public class Main {
         ///System.out.println("Grafo : \n" + grafo.toString());
 
         // Obtener la lista de adyacencia del vértice "Q"
-        List<String> adyacentesDeQ = grafo.getAdjacentVertices("Z");
+        //List<String> adyacentesDeQ = grafo.getAdjacentVertices("Z");
 
         // Imprimir la lista de adyacencia de "Q"
         //System.out.println("Adyacentes de Q: " + adyacentesDeQ);
@@ -71,6 +71,10 @@ public class Main {
         //System.out.println(costoMinimo);
 
         //Recorridos.dfs(grafo, "A");
+        
+        //System.out.println("Adyacentes de Q: " + grafo.adjacencyList);
+        
+        
 
     }
     

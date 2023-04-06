@@ -27,6 +27,7 @@ public class Graph<T> {
     public void addVertex(T vertex, int x, int y) {
         adjacencyList.put(vertex, new ArrayList<>());
         coordinates.put(vertex, new int[]{x, y});
+        
     }
 
     public void removeVertex(T vertex) {
