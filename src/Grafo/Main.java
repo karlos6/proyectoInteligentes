@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -25,11 +26,12 @@ public class Main {
     };
 
     Graph<String> grafo = new Graph<String>();
+    Random rand = new Random();
     
    // Agregar los vértices al grafo
     for (int i = 0; i < matriz.length; i++) {
         for (int j = 0; j < matriz[i].length; j++) {
-            grafo.addVertex(matriz[i][j]);
+            grafo.addVertex(matriz[i][j], i,j);
         }
     }
 
@@ -38,11 +40,11 @@ public class Main {
         for (int j = 0; j < matriz[i].length; j++) {
             // Agregar arista con el siguiente vértice en la fila
             if (j < matriz[i].length - 1) {
-                grafo.addEdge(matriz[i][j], matriz[i][j+1]);
+                grafo.addEdge(matriz[i][j], matriz[i][j+1], rand.nextInt(99) + 1);
             }
             // Agregar arista con el siguiente vértice en la columna
             if (i < matriz.length - 1) {
-                grafo.addEdge(matriz[i][j], matriz[i+1][j]);
+                grafo.addEdge(matriz[i][j], matriz[i][j+1], rand.nextInt(99) + 1);
             }
         }
     }
@@ -65,36 +67,11 @@ public class Main {
          //consto uniforme
         //Map<String, Integer> costoMinimo = Recorridos.costoUniforme(grafo.adjacencyList, "A","U");
         
-        List<String> costoMinimo = Recorridos.costoUniforme(grafo.adjacencyList, "A","H");
-        System.out.println(costoMinimo);
+        //List<String> costoMinimo = Recorridos.costoUniforme(grafo.adjacencyList, "A","H");
+        //System.out.println(costoMinimo);
 
-        
-        
-        
-        
-        
-        
-       
-        
-      
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        Recorridos.dfs(grafo, "A");
+        //Recorridos.dfs(grafo, "A");
 
     }
-    
-    
-    
-    
-        
-    
-    
     
 }
