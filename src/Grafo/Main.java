@@ -5,7 +5,11 @@
  */
 package Grafo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -43,14 +47,54 @@ public class Main {
         }
     }
 
-        System.out.println("Grafo : " + grafo.toString());
+        ///System.out.println("Grafo : \n" + grafo.toString());
 
         // Obtener la lista de adyacencia del vértice "Q"
         List<String> adyacentesDeQ = grafo.getAdjacentVertices("Z");
 
         // Imprimir la lista de adyacencia de "Q"
-        System.out.println("Adyacentes de Q: " + adyacentesDeQ);
+        //System.out.println("Adyacentes de Q: " + adyacentesDeQ);
 
+
+        //Recorridos.dfs(grafo, "A");
+         
+        //System.out.println("Adyacentes de Q: " + grafo.adjacencyList);
+         
+         
+         
+         //consto uniforme
+        //Map<String, Integer> costoMinimo = Recorridos.costoUniforme(grafo.adjacencyList, "A","U");
+        
+        List<String> costoMinimo = Recorridos.costoUniforme(grafo.adjacencyList, "A","H");
+        System.out.println(costoMinimo);
+
+        
+        
+        
+        
+        
+        
+       
+        
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
         Recorridos.dfs(grafo, "A");
+
     }
+    
+    
+    
+    
+        
+    
+    
+    
 }

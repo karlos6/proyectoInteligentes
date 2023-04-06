@@ -16,7 +16,7 @@ import java.util.Set;
  * @author Asus
  */
 public class Graph<T> {
-    private Map<T, Set<T>> adjacencyList;
+    public Map<T, Set<T>> adjacencyList;
 
     public Graph() {
         adjacencyList = new HashMap<>();
