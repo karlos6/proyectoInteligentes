@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Grafo;
+package Models;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  *
@@ -17,7 +16,7 @@ import java.util.Set;
  */
 public class Graph<T> {
     public Map<T, List<Edge<T>>> adjacencyList;
-    private Map<T, int[]> coordinates;
+    public Map<T, int[]> coordinates;
 
     public Graph() {
         adjacencyList = new HashMap<>();
@@ -40,7 +39,8 @@ public class Graph<T> {
         List<Edge<T>> destinationNeighbors = adjacencyList.get(destination);
         sourceNeighbors.add(new Edge<>(destination, weight));
         destinationNeighbors.add(new Edge<>(source, weight));
-    }
+    }   
+    
 
     public void removeEdge(T source, T destination) {
         List<Edge<T>> sourceNeighbors = adjacencyList.get(source);
@@ -79,6 +79,8 @@ public class Graph<T> {
     public int[] getNodeCoordinates(T vertex) {
         return coordinates.get(vertex);
     }
+    
+    
 
     @Override
     public String toString() {
@@ -93,4 +95,3 @@ public class Graph<T> {
         return sb.toString();
     }
 }
-
