@@ -20,8 +20,8 @@ import java.util.Scanner;
  */
 public class TextToMatrix {
     
-   public static char[][] readMatrixFromFile(String fileName) {
-    char[][] matrix = null;
+   public static String[][] readMatrixFromFile(String fileName) {
+    String[][] matrix = null;
     try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
         String line;
         int numRows = 0;
@@ -34,7 +34,7 @@ public class TextToMatrix {
         }
 
         // inicializar la matriz con el número de filas y columnas contados
-        matrix = new char[numRows][numCols];
+        matrix = new String[numRows][numCols];
 
         // llenar la matriz con los valores del archivo
         br.close();
@@ -44,7 +44,7 @@ public class TextToMatrix {
             line = line.replace(",", ""); // quitar la coma
             String[] values = line.split(" "); // dividir las filas por espacios en blanco
             for (int j = 0; j < numCols; j++) {
-                matrix[i][j] = values[j].charAt(0);
+                matrix[i][j] = values[j];
             }
             i++;
         }
