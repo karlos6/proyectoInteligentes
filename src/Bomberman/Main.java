@@ -7,14 +7,19 @@ package Bomberman;
 
 import Algorithms.AStarEuclidean;
 import Algorithms.AStarManhattan;
+import Algorithms.BeamSearch;
 import Algorithms.BreadthFirstSearch;
 import Algorithms.DepthFirstSearch;
+import Algorithms.HillClimbing;
+import Algorithms.UniformCostSearch;
+import Models.Edge;
 import Models.Graph;
 import ReadFile.TextToMatrix;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -26,7 +31,7 @@ public class Main {
         Graph<String> grafo = new Graph<String>();
         Random rand = new Random();
         
-        String[][] matrix = TextToMatrix.readMatrixFromFile("C:\\Users\\Asus\\OneDrive - CONSENSUS SAS\\Escritorio\\Matriz.txt");
+        String[][] matrix = TextToMatrix.readMatrixFromFile("C:\\Users\\carlo\\Documents\\Universidad de Caldas\\Inteligentes\\Matriz.txt");
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 grafo.addVertex(matrix[i][j], i,j);
@@ -91,7 +96,20 @@ public class Main {
         System.out.println("A* Euclidiana : " + aStarEuclidiana);
         
         List<String> aStarManhattan =AStarManhattan.aStar(grafo, "A", "Z1");
-        System.out.println("A* Manhattan : " + aStarManhattan);
+        System.out.println("A* Manhattan : " + aStarManhattan);   
+        
+        List<String> costoMinimo = UniformCostSearch.costoUniforme(grafo.adjacencyList, "A","H");
+        System.out.println("Recorrido Costo Uniforme: "+costoMinimo);
+        
+        List<String> recHillEucli = HillClimbing.hillClimbing(grafo.adjacencyList, "A", "Z1", grafo,true);        
+        System.out.println("Recorrido hill Climbing Euclidiana: " + recHillEucli);
+        List<String> recHillman = HillClimbing.hillClimbing(grafo.adjacencyList, "A", "Z1", grafo,false);        
+        System.out.println("Recorrido hill Climbing Manhattan: " + recHillman);
+        
+        List<String> recorridoBean = BeamSearch.beamSearch(grafo.adjacencyList,"A","Z",grafo,true);        
+        System.out.println("Recorrido beam Search Euclidiana" + recorridoBean);
+        List<String> recorridoBeans = BeamSearch.beamSearch(grafo.adjacencyList,"A","Z",grafo,false);        
+        System.out.println("Recorrido beam Search Manhattan" + recorridoBeans);   
        
     }
     
