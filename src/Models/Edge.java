@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Grafo;
+package Models;
 
 /**
  *
  * @author Asus
  */
 public class Edge<T> {
-        T destination;
-        int weight;
+        public T destination;
+        public int weight;
 
         public Edge(T destination, int weight) {
             this.destination = destination;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Grafo;
+package Bomberman;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,47 +25,6 @@ import java.util.Set;
  * @author carlo
  */
 public class Recorridos {
-    
-    // Busqueda en profundidad    
-    public static void dfs(Graph<String> graph, String start) {
-        Set<String> visited = new HashSet<>();
-        dfsHelper(graph, start, visited);
-    }
-
-    private static void dfsHelper(Graph<String> graph, String current, Set<String> visited) {
-        System.out.print(current + " ");
-        visited.add(current);
-        List<String> neighbors = graph.getAdjacentVertices(current);
-        for (String neighbor : neighbors) {
-            if (!visited.contains(neighbor)) {
-                dfsHelper(graph, neighbor, visited);
-            }
-        }
-    }
-    
-    // Busqueda en anchura
-    public static void bfs(Graph<String> graph, String startVertex) {
-        Set<String> visited = new HashSet<>();
-        Queue<String> queue = new LinkedList<>();
-        queue.add(startVertex);
-        bfsHelper(graph, visited, queue);
-    }
-
-    private static void bfsHelper(Graph<String> graph, Set<String> visited, Queue<String> queue) {
-        if (queue.isEmpty()) {
-            return;
-        }
-        String current = queue.poll();
-        visited.add(current);
-        System.out.print(current + " ");
-        List<String> neighbors = graph.getAdjacentVertices(current);
-        for (String neighbor : neighbors) {
-            if (!visited.contains(neighbor)) {
-                queue.add(neighbor);
-            }
-        }
-        bfsHelper(graph, visited, queue);
-    }   
     
     //Busqueda por costo uniforme
     public static List<String> costoUniforme(Map<String, Set<String>> grafo, String nodoInicio, String nodoDestino ) {
