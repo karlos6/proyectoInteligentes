@@ -70,10 +70,22 @@ public class Main {
         //List<String> adyacentesDeQ = grafo.getAdjacentVertices("Z");
 
         List<String> adyacentesDeQ = grafo.getAdjacentVertices("Q");
+        
+        Map<String, List<Edge<String>>> adyacentes = grafo.adjacencyList;
+        System.out.println("destino: " + adyacentes.get("A").get(0).destination);
+        System.out.println("destino: " + adyacentes.get("A").get(1).destination);
+        System.out.println("peso: " + adyacentes.get("A").get(0).weight);
+        System.out.println("x: " + grafo.getNodeCoordinates("A")[0]);
+        System.out.println("y: " + grafo.getNodeCoordinates("A")[1]);
+        
+        List<String> recHillEucli = Recorridos.hillClimbing(adyacentes, "A", "Z1", grafo,true);        
+        System.out.println("Recorrido Hill eucle: " + recHillEucli);
+        List<String> recHillman = Recorridos.hillClimbing(adyacentes, "A", "Z1", grafo,false);        
+        System.out.println("Recorrido Hill man: " + recHillman);
 
 
-        // Imprimir la lista de adyacencia de "Q"
-        System.out.println("Adyacentes de Q: " + adyacentesDeQ);
+        //Imprimir la lista de adyacencia de "Q"
+        //System.out.println("Adyacentes de Q: " + adyacentesDeQ);
 
 
         //Recorridos.dfs(grafo, "A");
@@ -82,9 +94,9 @@ public class Main {
          
          
          
-         //consto uniforme
+        //consto uniforme
         //Map<String, Integer> costoMinimo = Recorridos.costoUniforme(grafo.adjacencyList, "A","U");
-        
+        //System.out.println("consto uniforme");
         //List<String> costoMinimo = Recorridos.costoUniforme(grafo.adjacencyList, "A","H");
         //System.out.println(costoMinimo);
 
@@ -93,7 +105,19 @@ public class Main {
         //System.out.println("Adyacentes de Q: " + grafo.adjacencyList);
         
         
+        
+        List<String> recorridoBean = Recorridos.beamSearch(grafo.adjacencyList,"A","Z",grafo,true);        
+        System.out.println("Recorrido eucli" + recorridoBean);
+        List<String> recorridoBeans = Recorridos.beamSearch(grafo.adjacencyList,"A","Z",grafo,false);        
+        System.out.println("Recorrido Man" + recorridoBeans);
+        
+        
+        
 
     }
+    
+    
+    
+    
     
 }
