@@ -96,4 +96,58 @@ public class BreadthFirstSearch {
         // Devolver el camino encontrado
         return path;
     }
+    
+    private static int bfsNivel(Map<String, String> parent, String end) {
+        // Lista para almacenar el camino encontrado
+        List<String> path = new ArrayList<>();
+        // Agregar el nodo final al camino
+        path.add(end);
+        // Reconstruir el camino agregando el nodo padre del nodo actual hasta llegar al nodo inicial
+        while (parent.containsKey(end)) {
+            end = parent.get(end);
+            path.add(0, end);
+        }
+        // Devolver el camino encontrado
+        return path.size()-1;
+    }
+        
+    public static int bfsNivel(Graph<String> graph, String start, String end) {
+        // Conjunto para mantener el registro de los nodos visitados
+        Set<String> visited = new HashSet<>();
+        // Mapa para guardar el nodo padre de cada nodo visitado
+        Map<String, String> parent = new HashMap<>();
+        // Cola para procesar los nodos por nivel
+        Queue<String> queue = new LinkedList<>();
+        // Lista para almacenar el camino encontrado
+        List<String> path = new ArrayList<>();
+
+        // Marcar el nodo de inicio como visitado y agregarlo a la cola
+        visited.add(start);
+        queue.add(start);
+
+        // Mientras la cola no esté vacía, continuar procesando los nodos
+        while (!queue.isEmpty()) {
+            // Sacar el primer nodo de la cola
+            String current = queue.poll();
+            // Agregarlo al camino encontrado
+            path.add(current);
+
+            // Si se ha encontrado el nodo final, reconstruir y devolver el camino
+            if (current.equals(end)) {
+                return bfsNivel(parent, end);
+            }
+
+            // Para cada nodo adyacente no visitado, marcarlo como visitado, guardar su nodo padre y agregarlo a la cola
+            for (String neighbor : graph.getAdjacentVertices(current)) {
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    parent.put(neighbor, current);
+                    queue.add(neighbor);
+                }
+            }
+        }
+
+        // Si el camino no ha sido encontrado, devolver null
+        return 0;
+    }
 }
