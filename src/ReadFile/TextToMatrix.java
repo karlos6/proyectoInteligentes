@@ -54,6 +54,20 @@ public class TextToMatrix {
     }
     return matrix;
 }
+   
+   public static String[][] matrizCaminos(String[][] matrizTotal){
+        int rows = matrizTotal.length;
+        int cols = matrizTotal[0].length;
+        int count = 1;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) 
+            {
+                matrizTotal[i][j] = matrizTotal[i][j]+count;
+                count++;         
+            }
+        }
+        return matrizTotal;
+     }
      
      
 }

@@ -24,7 +24,7 @@ public class BombermanAgente extends Agent{
     protected void setup() {
         
          //bomberMan = new BomberMan();
-         bomberMan = new BomberMan();
+         //bomberMan = new BomberMan();
          bomberMan.inicioJuego();        
         //bomberMan.start();
         //bomberMan.update();

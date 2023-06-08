@@ -64,6 +64,8 @@ public class InicioBomberman extends JFrame{
     
     List<String> recorridoObjetivo;
     boolean esEuclidiana = false;
+    String[][] matrix;
+    String[][] matrizRecorridos;
     
     Graph<String> graph;
     
@@ -74,46 +76,57 @@ public class InicioBomberman extends JFrame{
         @Override
         public void actionPerformed(ActionEvent ae) {
             
-            
-            String heuristica = "";
-            String busqueda = "";
-            
-            
+         int x = 0;
+         int y = 0;
+        
+         for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j].equals("P")) {
+                    x=j;
+                    y=i;
+                }
+            }
+         }
+ 
+    
+                       
             if(euclidiana.isSelected()){
                 esEuclidiana = true;
             } 
             if(manhattan.isSelected()){
                 esEuclidiana = false;
             }
-            
+                       
+            matrizRecorridos = TextToMatrix.matrizCaminos(matrizRecorridos);
+                       
             if(anchura.isSelected()) {
-                recorridoObjetivo = DepthFirstSearch.dfs(graph, "A", "U"); 
+                recorridoObjetivo = DepthFirstSearch.dfs(graph, matrizRecorridos[1][1], matrizRecorridos[y][x]); 
             }
             if(profundidad.isSelected()){
-                recorridoObjetivo = BreadthFirstSearch.bfs(graph, "A", "U");
+                recorridoObjetivo = BreadthFirstSearch.bfs(graph, matrizRecorridos[1][1], matrizRecorridos[y][x]);
             }
             if(costoUniforme.isSelected()) {
-                recorridoObjetivo = UniformCostSearch.costoUniforme(graph.adjacencyList, "A","U");
+                recorridoObjetivo = UniformCostSearch.costoUniforme(graph.adjacencyList, matrizRecorridos[1][1], matrizRecorridos[y][x]);
             }
             if(hillClimbing.isSelected()){
                 if(esEuclidiana){
-                    recorridoObjetivo = HillClimbing.hillClimbing(graph.adjacencyList, "A", "U", graph,true);   
+                    recorridoObjetivo = HillClimbing.hillClimbing(graph.adjacencyList, matrizRecorridos[1][1], matrizRecorridos[y][x], graph,true);   
                 }else{
-                    recorridoObjetivo = HillClimbing.hillClimbing(graph.adjacencyList, "A", "U", graph,false);                     
+                    recorridoObjetivo = HillClimbing.hillClimbing(graph.adjacencyList, matrizRecorridos[1][1], matrizRecorridos[y][x], graph,false);                     
                 }
             }
             if(beam.isSelected()){
                 if(esEuclidiana){
-                     recorridoObjetivo = BeamSearch.beamSearch(graph.adjacencyList,"A","U",graph,true); 
+                     recorridoObjetivo = BeamSearch.beamSearch(graph.adjacencyList, matrizRecorridos[1][1], matrizRecorridos[y][x],graph,true); 
                 }else{
-                    recorridoObjetivo =  BeamSearch.beamSearch(graph.adjacencyList,"A","U",graph,false);                        
+                    recorridoObjetivo =  BeamSearch.beamSearch(graph.adjacencyList, matrizRecorridos[1][1], matrizRecorridos[y][x],graph,false);                        
                 }                 
             }
             if(aEstrella.isSelected()){
                 if(esEuclidiana){
-                     recorridoObjetivo =  AStarEuclidean.aStarEuclidiana(graph, "A", "U");
+                     recorridoObjetivo =  AStarEuclidean.aStarEuclidiana(graph, matrizRecorridos[1][1], matrizRecorridos[y][x]);
                 }else{
-                    recorridoObjetivo =  AStarManhattan.aStar(graph, "A", "U");                 
+                    recorridoObjetivo =  AStarManhattan.aStar(graph, matrizRecorridos[1][1], matrizRecorridos[y][x]);                 
                 }  
             }
             
@@ -121,12 +134,18 @@ public class InicioBomberman extends JFrame{
                 JOptionPane.showMessageDialog(null, "Seleccione una heuristica y una forma de busqueda");
             }else{
                 inicio.dispose();
-                BomberMan bomberMan = new BomberMan();
+                
+                
+                //matrix[matrix.length - 2][matrix[0].length - 2] = "P";
+                BomberMan bomberMan = new BomberMan(matrix,matrizRecorridos, recorridoObjetivo,matrix.length,matrix[0].length);
+                //bomberMan.setScene(scene);
                 bomberMan.inicioJuego();
                 
-                System.out.println("Grafo : \n" + graph.toString());    
-                System.out.println("Vertex : "+graph.getVertices());
+                //System.out.println("Grafo : \n" + graph.toString());    
+                //System.out.println("Vertex : "+graph.getVertices());
                 System.out.println("recorrido: "+recorridoObjetivo);
+                //System.out.println("Salida: "+matrix[1][1]);
+                //System.out.println("Meta: "+matrix[matrix.length - 2][matrix[0].length - 2]);
                 
                 //enemigo:Agentes.EnemigoAgent;bomberman:Bomberman.BombermanAgente;bombermanInterfaz:Bomberman.InterfazBomberman
                 //String[] opciones2 = { "-gui", "-agents", "bomberman:Bomberman.BombermanAgente"};
@@ -161,7 +180,8 @@ public class InicioBomberman extends JFrame{
                     File selectedFile = fileChooser.getSelectedFile();
                     String filePath = selectedFile.getAbsolutePath();
                     System.out.println("Ruta del archivo: " + filePath);
-                     String[][] matrix = TextToMatrix.readMatrixFromFile(filePath);
+                    matrix = TextToMatrix.readMatrixFromFile(filePath);
+                    matrizRecorridos = TextToMatrix.readMatrixFromFile(filePath);
                     int rows = matrix.length;
                     int cols = matrix[0].length;
                     System.out.println("Matris: " + matrix);
@@ -170,20 +190,15 @@ public class InicioBomberman extends JFrame{
 
                     for (int i = 0; i < rows; i++) {
                         for (int j = 0; j < cols; j++) {   
-
-                            if(!obstaculos(matrix[i][j])){
-
-                                //String vertex = matrix[i][j] + (i * cols + j + 1);
-                                String vertex = matrix[i][j];
+                            if(!matrix[i][j].equals("M")){
+                                String vertex = matrix[i][j] + (i * cols + j + 1);
                                 graph.addVertex(vertex, i, j);
-                                if (i > 0 && !obstaculos(matrix[i - 1][j])) {      
-                                    //String upVertex = matrix[i - 1][j] + ((i - 1) * cols + j + 1);  
-                                    String upVertex = matrix[i - 1][j];  
+                                if (i > 0 && !matrix[i - 1][j].equals("M")) {      
+                                    String upVertex = matrix[i - 1][j] + ((i - 1) * cols + j + 1);                            
                                     graph.addEdge(vertex, upVertex, 1);                    
                                 }
-                                if (j > 0 && !obstaculos(matrix[i][j - 1])) {
-                                    //String leftVertex =  matrix[i][j - 1]+ (i * cols + j);
-                                    String leftVertex =  matrix[i][j - 1];
+                                if (j > 0 && !matrix[i][j - 1].equals("M")) {
+                                    String leftVertex =  matrix[i][j - 1]+ (i * cols + j);
                                     graph.addEdge(vertex, leftVertex, 1);
                                 }
                             }                
