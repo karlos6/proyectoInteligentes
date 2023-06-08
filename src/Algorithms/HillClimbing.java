@@ -23,7 +23,7 @@ public class HillClimbing {
         path.add(start);
         String current = start;
         while (!current.equals(goal)) {
-            
+           
             Set<String> neighbors = new HashSet<>();
             
             for(Edge<String> nodo : graph.get(current)){
@@ -40,7 +40,7 @@ public class HillClimbing {
             for (String neighbor : neighbors) {
                 double distance = heuristic(neighbor, goal, grafo,activarHeuristica );
                  // calcula la distancia heurística entre el vecino y el objetivo
-                if (distance < shortestDistance) {
+                if (distance < shortestDistance && !path.contains(neighbor)) {
                     next = neighbor;
                     shortestDistance = distance;
                 }
